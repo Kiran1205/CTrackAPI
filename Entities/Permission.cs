@@ -5,20 +5,17 @@ using System.Threading.Tasks;
 
 namespace CTrackAPI.Entities
 {
-    public class Chitti
+    public class Permission
     {
-        [Key]
+        [key]
+
+        public long PermissionPID { get; set; }
+
         public long ChittiPID { get; set; }
 
-        public string Name { get; set; }
+        public long UserPID { get; set; }
 
-        public double Amount { get; set; }
-
-        public double Commission { get; set; }
-
-        public int NoOfMonths { get; set; }
-
-        public DateTime StartDate { get; set; }
+        public long RolePID { get; set; }
 
         public DateTime CreatedOn { get; set; }
 

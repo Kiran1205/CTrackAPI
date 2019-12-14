@@ -5,20 +5,13 @@ using System.Threading.Tasks;
 
 namespace CTrackAPI.Entities
 {
-    public class Chitti
+    public class NotificationType
     {
-        [Key]
-        public long ChittiPID { get; set; }
+        [key]
 
-        public string Name { get; set; }
+        public long NotificationTypePID { get; set; }
 
-        public double Amount { get; set; }
-
-        public double Commission { get; set; }
-
-        public int NoOfMonths { get; set; }
-
-        public DateTime StartDate { get; set; }
+        public string Type { get; set; }
 
         public DateTime CreatedOn { get; set; }
 
