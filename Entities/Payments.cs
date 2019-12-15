@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -7,7 +8,7 @@ namespace CTrackAPI.Entities
 {
     public class Payments
     {
-        [key]
+        [Key]
         public long PaymentsPID { get; set; }
 
         public long PeoplePID { get; set; }

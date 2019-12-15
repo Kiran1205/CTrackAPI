@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -7,7 +8,7 @@ namespace CTrackAPI.Entities
 {
     public class NotificationType
     {
-        [key]
+        [Key]
 
         public long NotificationTypePID { get; set; }
 

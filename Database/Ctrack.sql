@@ -16,9 +16,7 @@ CREATE TABLE [dbo].[User] (
 	PinNumber BIGINT NULL,
 	DeviseInfo VARCHAR(256) NULL,
 	CreatedOn DATETIME NULL DEFAULT GETDATE(),
-	UpdatedOn DATETIME NULL,
-	CreatedBy BIGINT NULL,
-	UpdatedBy BIGINT NULL
+	UpdatedOn DATETIME NULL	
 )
 
 GO

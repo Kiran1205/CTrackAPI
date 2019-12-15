@@ -2,12 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations;
 
 namespace CTrackAPI.Entities
 {
     public class Roles
     {
-        [key]
+        [Key]
         public long RolesPID { get; set; }
 
         public string Name { get; set; }

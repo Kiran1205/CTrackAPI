@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -7,8 +8,7 @@ namespace CTrackAPI.Entities
 {
     public class Permission
     {
-        [key]
-
+        [Key]
         public long PermissionPID { get; set; }
 
         public long ChittiPID { get; set; }
