@@ -13,5 +13,6 @@ namespace CTrackAPI
         public APIDataContext(DbContextOptions<APIDataContext> options) : base(options) { }
 
         public DbSet<User> User { get; set; }
+
     }
 }
