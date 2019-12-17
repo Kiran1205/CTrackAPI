@@ -48,7 +48,25 @@ namespace CTrackAPI.Controllers
                 user.CreatedOn = DateTime.Now;
                 user.UpdatedOn = DateTime.Now;
                 _userRepository.Create(user);
-                return Ok();
+                return Ok(user);
+            }
+            catch (Exception ex)
+            {
+                // return error message if there was an exception
+                return BadRequest(new { message = ex.Message });
+            }
+        }
+
+        [HttpPost("authenticate")]
+        public IActionResult Authenticate([FromBody]User user)
+        {
+            if (user == null)
+                return BadRequest(new { message = "Bad request" });
+
+            try
+            {
+               
+                return Ok(user);
             }
             catch (Exception ex)
             {
