@@ -9,5 +9,7 @@ namespace CTrackAPI.Repositories.Interfaces
     public interface IUserRepository
     {
         User Create(User user);
+
+        User Getuser(User user);
     }
 }

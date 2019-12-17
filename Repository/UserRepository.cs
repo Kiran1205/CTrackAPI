@@ -21,7 +21,14 @@ namespace CTrackAPI.Repository
         {
             _context.User.Add(user);
             _context.SaveChanges();
+
+            
             return user;
+        }
+
+        public User Getuser(User user)
+        {
+           return _context.User.FirstOrDefault(x => x.PhoneNumber == user.PhoneNumber && x.Password == user.Password);
         }
     }
 }

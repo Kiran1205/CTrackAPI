@@ -65,6 +65,7 @@ namespace CTrackAPI.Controllers
 
             try
             {
+                user = _userRepository.Getuser(user);
                
                 return Ok(user);
             }
