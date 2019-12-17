@@ -17,7 +17,7 @@ namespace CTrackAPI.Entities
 
         public double Commission { get; set; }
 
-        public int NoOfMonths { get; set; }
+        public int NoOfMonths { get; set; }        
 
         public DateTime StartDate { get; set; }
 

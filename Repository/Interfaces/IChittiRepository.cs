@@ -3,15 +3,21 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using CTrackAPI.Entities;
+using CTrackAPI.Model;
 
 namespace CTrackAPI.Repository.Interfaces
 {
-    interface IChittiRepository
+    public interface IChittiRepository
     {
         Chitti Create(Chitti user);
 
         Chitti Update(Chitti user);
 
         bool Delete(int ChittiID);
+
+        List<ChittiDto> GetChittiByUserId(int userid);
+
+        Chitti Get(long ChittiPID);
+
     }
 }

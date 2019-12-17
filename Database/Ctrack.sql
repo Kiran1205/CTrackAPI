@@ -46,7 +46,7 @@ ON [dbo].[User]
 --[dbo].[Roles]
 CREATE TABLE [dbo].[Roles] (
 
-	RolesPID BIGINT IDENTITY(1,1) NOT NULL,
+	RolesPID int IDENTITY(1,1) NOT NULL,
 	Name VARCHAR(50) NULL,
 	CreatedOn DATETIME NULL DEFAULT GETDATE(),
 	UpdatedOn DATETIME NULL
@@ -129,7 +129,7 @@ CREATE TABLE [dbo].[PaymentTaken] (
 	PaymentTakenPID BIGINT IDENTITY(1,1) NOT NULL,
 	PeoplePID BIGINT NULL,
 	ChittiPID BIGINT NULL,
-	[Month] INT NULL,
+	[MonthDate] Date NULL,
 	Amount MONEY NULL,	
 	CreatedOn DATETIME NULL DEFAULT GETDATE(),
 	UpdatedOn DATETIME NULL,
@@ -228,7 +228,7 @@ CREATE TABLE [dbo].[PaymentPaid] (
 	PeoplePID BIGINT  NULL,
 	ChittiPID BIGINT NULL,
 	PaidAmount MONEY NULL,
-	[Date] DATETIME NULL,
+	PaidDate DATETIME NULL,
 	Comments VARCHAR(256)  NULL,
 	NotificationTypePID BIGINT NULL,	
 	CreatedOn DATETIME NULL DEFAULT GETDATE(),

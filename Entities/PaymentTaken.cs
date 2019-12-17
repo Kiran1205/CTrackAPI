@@ -16,7 +16,7 @@ namespace CTrackAPI.Entities
 
         public long ChittiPID { get; set; }
 
-        public int Month { get; set; }
+        public DateTime MonthDate { get; set; }
 
         public double Amount { get; set; }
 

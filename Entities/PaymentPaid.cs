@@ -17,7 +17,7 @@ namespace CTrackAPI.Entities
 
         public double PaidAmount { get; set; }
 
-        public DateTime Date { get; set; }
+        public DateTime PaidDate { get; set; }
 
         public string Comments { get; set; }
 

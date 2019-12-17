@@ -15,7 +15,7 @@ namespace CTrackAPI.Entities
 
         public long UserPID { get; set; }
 
-        public long RolePID { get; set; }
+        public int  RolePID { get; set; }
 
         public DateTime CreatedOn { get; set; }
 
