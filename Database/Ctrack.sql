@@ -46,7 +46,7 @@ ON [dbo].[User]
 --[dbo].[Roles]
 CREATE TABLE [dbo].[Roles] (
 
-	RolesPID int IDENTITY(1,1) NOT NULL,
+	RolesPID bigint IDENTITY(1,1) NOT NULL,
 	Name VARCHAR(50) NULL,
 	CreatedOn DATETIME NULL DEFAULT GETDATE(),
 	UpdatedOn DATETIME NULL
@@ -64,8 +64,7 @@ GO
 SET IDENTITY_INSERT [dbo].[Roles] on
 
 INSERT INTO [dbo].[Roles] (RolesPID,Name) VALUES(1,'Admin')
-INSERT INTO [dbo].[Roles] (RolesPID,Name) VALUES(2,'Read Only')
-INSERT INTO [dbo].[Roles] (RolesPID,Name) VALUES(3,'Read and Write')
+INSERT INTO [dbo].[Roles] (RolesPID,Name) VALUES(2,'Self')
 
 SET IDENTITY_INSERT [dbo].[Roles] off
 

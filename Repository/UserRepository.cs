@@ -42,7 +42,7 @@ namespace CTrackAPI.Repository
 
         public User Getuser(User user)
         {
-           return _context.User.FirstOrDefault(x => x.PhoneNumber == user.PhoneNumber && x.Password == user.Password);
+           return _context.User.First(x => x.PhoneNumber == user.PhoneNumber && x.Password == user.Password);
         }
     }
 }
