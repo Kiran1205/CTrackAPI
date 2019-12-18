@@ -12,14 +12,16 @@ namespace CTrackAPI.Model
 
         public string Name { get; set; }
 
-        public double Amount { get; set; }
+        public decimal Amount { get; set; }
 
         public int NoOfMonths { get; set; }
 
         public int PendingMonths { get; set; }
 
-        public double PendingAmount { get; set; }
+        public decimal PendingAmount { get; set; }
 
-        public int RolePid { get; set; }
+        public long RolePid { get; set; }
+
+        public long CalledUserPID { get; set; }
     }
 }

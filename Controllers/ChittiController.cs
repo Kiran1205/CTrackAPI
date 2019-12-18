@@ -36,7 +36,7 @@ public class ChittiController : ControllerBase
     }
 
     // GET api/values/5
-    [HttpGet("{id}")]
+    [HttpGet("GetUserChitti")]
     public IActionResult GetUserChitti(long userid)
     {
         return Ok(_chittiRepository.GetChittiByUserId(userid));

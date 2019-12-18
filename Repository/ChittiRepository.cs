@@ -21,6 +21,19 @@ namespace CTrackAPI.Repository
         {
             _context.Chitti.Add(chitti);
             _context.SaveChanges();
+
+            Permission obj = new Permission();
+            obj.ChittiPID = chitti.ChittiPID;
+            obj.CreatedBy = chitti.CreatedBy;
+            obj.CreatedOn = DateTime.Now;
+            obj.UpdatedOn = DateTime.Now;
+            obj.RolePID = 1/*Admin*/;
+            obj.UserPID = chitti.CreatedBy;
+
+            _context.Permission.Add(obj);
+
+            _context.SaveChanges();
+
             return chitti;
         }
 
@@ -45,6 +58,7 @@ namespace CTrackAPI.Repository
                 ChittiDto chittidto = new ChittiDto();
                 chittidto.ChittiPID = item.ChittiPID;
                 chittidto.RolePid = item.RolePID;
+                chittidto.CalledUserPID = userid;
 
                 var chitti = _context.Chitti.FirstOrDefault(x => x.ChittiPID == item.ChittiPID);
 

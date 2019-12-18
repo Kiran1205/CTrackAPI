@@ -22,14 +22,15 @@ namespace CTrackAPI.Repository
             _context.User.Add(user);
             _context.SaveChanges();
 
-            var chittisPID = _context.People.Where(x => x.PhoneNumber == user.PhoneNumber).Select(x => x.ChittiPID).ToList();
+            var chittisPID = _context.People.Where(x => x.PhoneNumber == user.PhoneNumber).ToList();
 
             foreach (var item in chittisPID)
             {
                 Permission objPermiss = new Permission();
-                objPermiss.ChittiPID = item;
+                objPermiss.ChittiPID = item.ChittiPID;
                 objPermiss.RolePID = 2;
                 objPermiss.UserPID = user.UserPID;
+                objPermiss.PeoplePID = item.PeoplePID;
                 objPermiss.CreatedOn = DateTime.Now;
                 objPermiss.CreatedBy = user.UserPID;
                 _context.Permission.Add(objPermiss);

@@ -36,6 +36,7 @@ namespace CTrackAPI
 
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IChittiRepository, ChittiRepository>();
+            services.AddScoped<IPeopleRepository, PeopleRepository>();
 
             services.AddSwaggerGen(c =>
             {

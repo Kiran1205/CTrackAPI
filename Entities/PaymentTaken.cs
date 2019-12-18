@@ -20,6 +20,8 @@ namespace CTrackAPI.Entities
 
         public double Amount { get; set; }
 
+        public double AmountByPeople { get; set; }
+
         public DateTime CreatedOn { get; set; }
 
         public DateTime UpdatedOn { get; set; }
