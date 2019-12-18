@@ -27,5 +27,7 @@ namespace CTrackAPI
         public DbSet<Payments> Payments { get; set; }
 
         public DbSet<PaymentTaken> PaymentTaken { get; set; }
+
+
     }
 }
