@@ -15,7 +15,7 @@ namespace CTrackAPI.Repository.Interfaces
 
         bool Delete(int ChittiID);
 
-        List<ChittiDto> GetChittiByUserId(int userid);
+        List<ChittiDto> GetChittiByUserId(long userid);
 
         Chitti Get(long ChittiPID);
 

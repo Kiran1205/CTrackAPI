@@ -35,7 +35,7 @@ namespace CTrackAPI.Repository
              return _context.Chitti.FirstOrDefault(x => x.ChittiPID == ChittiPID); ;
         }
 
-        public List<ChittiDto> GetChittiByUserId(int userid)
+        public List<ChittiDto> GetChittiByUserId(long userid)
         {
             List<ChittiDto> obj = new List<ChittiDto>();
 

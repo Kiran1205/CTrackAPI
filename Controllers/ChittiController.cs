@@ -30,9 +30,16 @@ public class ChittiController : ControllerBase
 
     // GET api/values/5
     [HttpGet("{id}")]
-    public ActionResult<string> Get(long id)
+    public IActionResult Get(long id)
     {
         return Ok(_chittiRepository.Get(id));
+    }
+
+    // GET api/values/5
+    [HttpGet("{id}")]
+    public IActionResult GetUserChitti(long userid)
+    {
+        return Ok(_chittiRepository.GetChittiByUserId(userid));
     }
 
     // POST api/values

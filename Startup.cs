@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using CTrackAPI.Repositories.Interfaces;
 using CTrackAPI.Repository;
+using CTrackAPI.Repository.Interfaces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -34,6 +35,7 @@ namespace CTrackAPI
 
 
             services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IChittiRepository, ChittiRepository>();
 
             services.AddSwaggerGen(c =>
             {
