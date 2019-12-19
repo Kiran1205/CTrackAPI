@@ -9,6 +9,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace CTrackAPI.Controllers
 {
+    [Route("api/[controller]")]
+    [ApiController]
     public class PeopleController : Controller
     {
         private IPeopleRepository _peopleRepository;
@@ -19,8 +21,8 @@ namespace CTrackAPI.Controllers
 
         }
 
-        [HttpGet("GetPeople")]
-        public IActionResult Create([FromBody]ChittiDto chitti)
+        [HttpPost("getPeople")]
+        public IActionResult GetPeople([FromBody]ChittiDto chitti)
         {
             if (chitti == null)
                 return BadRequest(new { message = "Bad request" });
@@ -28,8 +30,8 @@ namespace CTrackAPI.Controllers
             try
             {
 
-                _peopleRepository.GetPeople(chitti);
-                return Ok(chitti);
+                var listofPeople = _peopleRepository.GetPeople(chitti);
+                return Ok(listofPeople);
             }
             catch (Exception ex)
             {

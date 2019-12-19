@@ -78,6 +78,7 @@ namespace CTrackAPI.Repository
                            TotalPaid = g.Sum(o => o.PaidAmount)
                        });
 
+                    if(AmountNeedToPay.Any())
                     people.PendingAmount = AmountNeedToPay.FirstOrDefault().ActualAmount - objpaidAmount.FirstOrDefault().TotalPaid;
 
                     peoplelist.Add(people);
@@ -103,7 +104,8 @@ namespace CTrackAPI.Repository
                             TotalPaid = g.Sum(o => o.PaidAmount)
                         });
 
-                    people.PendingAmount = AmountNeedToPay.FirstOrDefault().ActualAmount - objpaidAmount.FirstOrDefault().TotalPaid;
+                    if (AmountNeedToPay.Any())
+                        people.PendingAmount = AmountNeedToPay.FirstOrDefault().ActualAmount - objpaidAmount.FirstOrDefault().TotalPaid;
 
                     peoplelist.Add(people);
                 }

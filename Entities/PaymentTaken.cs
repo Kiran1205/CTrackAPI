@@ -29,5 +29,9 @@ namespace CTrackAPI.Entities
         public long CreatedBy { get; set; }
 
         public long UpdatedBy { get; set; }
+
+        public double AuctionAmount { get; set; }
+
+        public double BasicAmount { get; set; }
     }
 }

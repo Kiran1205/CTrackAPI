@@ -130,6 +130,8 @@ CREATE TABLE [dbo].[PaymentTaken] (
 	ChittiPID BIGINT NULL,
 	[MonthDate] Date NULL,
 	Amount MONEY NULL,	
+	AuctionAmount MONEY NULL,	
+	BasicAmount MONEY NULL,		
 	AmountByPeople MONEY NULL,
 	CreatedOn DATETIME NULL DEFAULT GETDATE(),
 	UpdatedOn DATETIME NULL,
