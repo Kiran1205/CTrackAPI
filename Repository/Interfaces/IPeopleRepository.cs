@@ -16,5 +16,10 @@ namespace CTrackAPI.Repository.Interfaces
         List<PeopleDto> GetPeople(ChittiDto chittiDto);
 
         bool Delete(int PeopleID);
+
+        List<PaymentPaid> GetPeoplePaidHistory(long PeoplePid);
+
+        PaymentPaid PaymentPaidSave(PaymentPaid paymentPaid);
+
     }
 }

@@ -49,7 +49,17 @@ namespace CTrackAPI.Repository
             _context.SaveChanges();
             return people;
         }
+        public PaymentPaid PaymentPaidSave(PaymentPaid paymentPaid)
+        {
+            _context.PaymentPaid.Add(paymentPaid);
+            _context.SaveChanges();
+            return paymentPaid;
+        }
 
+        public List<PaymentPaid> GetPeoplePaidHistory(long PeoplePid)
+        {
+            return _context.PaymentPaid.Where(x => x.PeoplePID == PeoplePid).ToList();
+        }
         public List<PeopleDto> GetPeople(ChittiDto chittiDto)
         {
             var peoplelist = new List<PeopleDto>();

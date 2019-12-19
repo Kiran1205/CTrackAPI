@@ -11,7 +11,7 @@ namespace CTrackAPI.Model
 
         public long PhoneNumber { get; set; }
 
-        public double PendingAmount { get; set; }
+        public decimal PendingAmount { get; set; }
 
         public long ChittiPID { get; set; }
 

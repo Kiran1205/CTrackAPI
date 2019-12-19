@@ -60,5 +60,42 @@ namespace CTrackAPI.Controllers
                 return BadRequest(new { message = ex.Message });
             }
         }
+
+        [HttpPost("paymentpaid")]
+        public IActionResult PaymentPaid([FromBody]PaymentPaid paymentpaid)
+        {
+            if (paymentpaid == null)
+                return BadRequest(new { message = "Bad request" });
+
+            try
+            {
+                paymentpaid.CreatedOn = DateTime.Now;
+                paymentpaid.UpdatedOn = DateTime.Now;
+                _peopleRepository.PaymentPaidSave(paymentpaid);
+                return Ok(paymentpaid);
+            }
+            catch (Exception ex)
+            {
+                // return error message if there was an exception
+                return BadRequest(new { message = ex.Message });
+            }
+        }
+
+        // GET api/values/5
+        [HttpGet("getpaidhistory")]
+        public IActionResult GetPaidHistory(long peoplepid)
+        {
+            try
+            {
+
+                var list =  _peopleRepository.GetPeoplePaidHistory(peoplepid);
+                return Ok(list);
+            }
+            catch (Exception ex)
+            {
+                // return error message if there was an exception
+                return BadRequest(new { message = ex.Message });
+            }
+        }
     }
 }
