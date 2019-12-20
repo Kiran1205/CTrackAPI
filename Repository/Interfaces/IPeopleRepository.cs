@@ -17,9 +17,7 @@ namespace CTrackAPI.Repository.Interfaces
 
         bool Delete(int PeopleID);
 
-        List<PaymentPaid> GetPeoplePaidHistory(long PeoplePid);
-
-        PaymentPaid PaymentPaidSave(PaymentPaid paymentPaid);
+        List<People> GetPeopleList(long chittiPid);
 
     }
 }

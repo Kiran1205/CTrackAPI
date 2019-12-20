@@ -18,6 +18,8 @@ namespace CTrackAPI.Entities
 
         public DateTime MonthDate { get; set; }
 
+        public int MonthNumber { get; set; }
+
         public decimal Amount { get; set; }
 
         public decimal AmountByPeople { get; set; }
@@ -33,5 +35,7 @@ namespace CTrackAPI.Entities
         public decimal AuctionAmount { get; set; }
 
         public decimal BasicAmount { get; set; }
+
+        public decimal CommissionAmount { get; set; }
     }
 }

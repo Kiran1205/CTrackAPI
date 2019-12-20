@@ -37,7 +37,8 @@ namespace CTrackAPI
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IChittiRepository, ChittiRepository>();
             services.AddScoped<IPeopleRepository, PeopleRepository>();
-
+            services.AddScoped<IPaymentsRepository, PaymentsRepository>();
+            
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new Swashbuckle.AspNetCore.Swagger.Info { Title = "CTrack API", Version = "v1" });

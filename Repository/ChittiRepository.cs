@@ -76,6 +76,17 @@ namespace CTrackAPI.Repository
             return obj;
         }
 
+        public List<Chitti> GetAdminChitti(long userid)
+        {
+            var chittilist = new List<Chitti>();
+            var Permissions = _context.Permission.Where(x => x.UserPID == userid && x.RolePID == 1).ToList();
+            foreach (var item in Permissions)
+            {
+                chittilist.Add( _context.Chitti.First(x => x.ChittiPID == item.ChittiPID));
+            }
+            return chittilist;
+        }
+
         public bool Delete(int chittiID)
         {
             return false;

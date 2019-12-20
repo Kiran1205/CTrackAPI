@@ -133,6 +133,8 @@ CREATE TABLE [dbo].[PaymentTaken] (
 	AuctionAmount MONEY NULL,	
 	BasicAmount MONEY NULL,		
 	AmountByPeople MONEY NULL,
+	CommissionAmount MONEY NULL,
+	MonthNumber int null,	
 	CreatedOn DATETIME NULL DEFAULT GETDATE(),
 	UpdatedOn DATETIME NULL,
 	CreatedBy BIGINT NULL,

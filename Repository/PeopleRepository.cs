@@ -49,17 +49,7 @@ namespace CTrackAPI.Repository
             _context.SaveChanges();
             return people;
         }
-        public PaymentPaid PaymentPaidSave(PaymentPaid paymentPaid)
-        {
-            _context.PaymentPaid.Add(paymentPaid);
-            _context.SaveChanges();
-            return paymentPaid;
-        }
-
-        public List<PaymentPaid> GetPeoplePaidHistory(long PeoplePid)
-        {
-            return _context.PaymentPaid.Where(x => x.PeoplePID == PeoplePid).ToList();
-        }
+       
         public List<PeopleDto> GetPeople(ChittiDto chittiDto)
         {
             var peoplelist = new List<PeopleDto>();
@@ -89,7 +79,7 @@ namespace CTrackAPI.Repository
                        });
 
                     if(AmountNeedToPay.Any())
-                    people.PendingAmount = AmountNeedToPay.FirstOrDefault().ActualAmount - objpaidAmount.FirstOrDefault().TotalPaid;
+                    people.PendingAmount = AmountNeedToPay.FirstOrDefault().ActualAmount - (objpaidAmount.FirstOrDefault() == null ?  0: objpaidAmount.FirstOrDefault().TotalPaid );
 
                     peoplelist.Add(people);
                 }               
@@ -115,7 +105,7 @@ namespace CTrackAPI.Repository
                         });
 
                     if (AmountNeedToPay.Any())
-                        people.PendingAmount = AmountNeedToPay.FirstOrDefault().ActualAmount - objpaidAmount.FirstOrDefault().TotalPaid;
+                        people.PendingAmount = AmountNeedToPay.FirstOrDefault().ActualAmount - (objpaidAmount.FirstOrDefault() == null ? 0 : objpaidAmount.FirstOrDefault().TotalPaid);
 
                     peoplelist.Add(people);
                 }
@@ -126,6 +116,14 @@ namespace CTrackAPI.Repository
         {
             
             return true;
+        }
+
+        public List<People> GetPeopleList(long chittiPid)
+        {
+            var paymenttakenlist = _context.PaymentTaken.Where(x => x.ChittiPID == chittiPid).Select(y => y.PeoplePID).ToList();
+            var peoples = _context.People.Where(x => x.ChittiPID == chittiPid && !paymenttakenlist.Contains(x.PeoplePID)).ToList();
+            return peoples;
+
         }
     }
 }

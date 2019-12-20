@@ -29,6 +29,49 @@ namespace CTrackAPI.Repository
             _context.SaveChanges();
             return payments;
         }
+
+        public PaymentPaid PaymentPaidSave(PaymentPaid paymentPaid)
+        {
+            _context.PaymentPaid.Add(paymentPaid);
+            _context.SaveChanges();
+            return paymentPaid;
+        }
+
+        public List<PaymentPaid> GetPeoplePaidHistory(long PeoplePid)
+        {
+            return _context.PaymentPaid.Where(x => x.PeoplePID == PeoplePid).ToList();
+        }
+
+        public PaymentTaken GetPaymentTaken(long ChittiPID)
+        {
+            var chitti = _context.Chitti.First(x => x.ChittiPID == ChittiPID);
+            int months = chitti.NoOfMonths;
+
+            int completed = _context.PaymentTaken.Where(x => x.ChittiPID == ChittiPID).Count();
+            decimal commissionAmount = chitti.Amount * (chitti.Commission / 100);
+
+            decimal baseAmount = ((chitti.Amount / 100000) * 1200 * (months - (completed +1)) + commissionAmount);
+            PaymentTaken obj = new PaymentTaken();
+            obj.Amount = chitti.Amount - baseAmount;
+            obj.BasicAmount = baseAmount;
+            obj.AmountByPeople = (obj.Amount + commissionAmount) / months;
+            obj.CommissionAmount = commissionAmount;
+            obj.AuctionAmount = 0;
+            obj.MonthNumber = completed +1;
+            obj.ChittiPID = ChittiPID;
+            obj.CreatedOn = DateTime.Now;
+            obj.MonthDate = DateTime.Now;
+            
+            return obj;
+
+        }
+        public PaymentTaken SavePaymentTaken(PaymentTaken paymentTaken)
+        {
+            _context.PaymentTaken.Add(paymentTaken);
+            _context.SaveChanges();           
+            return paymentTaken;
+
+        }
         public bool Delete(int PaymentsID)
         {
             return false;

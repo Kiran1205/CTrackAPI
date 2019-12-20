@@ -42,6 +42,12 @@ public class ChittiController : ControllerBase
         return Ok(_chittiRepository.GetChittiByUserId(userid));
     }
 
+    [HttpGet("GetAdminChitti")]
+    public IActionResult GetAdminChitti(long userid)
+    {
+        return Ok(_chittiRepository.GetAdminChitti(userid));
+    }
+
     // POST api/values
     [HttpPost("create")]
     public IActionResult Create([FromBody]Chitti chitti)

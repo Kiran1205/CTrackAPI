@@ -19,5 +19,7 @@ namespace CTrackAPI.Repository.Interfaces
 
         Chitti Get(long ChittiPID);
 
+        List<Chitti> GetAdminChitti(long userid);
+
     }
 }

@@ -6,13 +6,21 @@ using CTrackAPI.Entities;
 
 namespace CTrackAPI.Repository.Interfaces
 {
-    interface IPaymentsRepository
+    public interface IPaymentsRepository
     {
         Payments Create(Payments payment);
 
         Payments Update(Payments payment);
 
         bool Delete(int PaymentID);
+
+        List<PaymentPaid> GetPeoplePaidHistory(long PeoplePid);
+
+        PaymentPaid PaymentPaidSave(PaymentPaid paymentPaid);
+
+        PaymentTaken GetPaymentTaken(long ChittiPID);
+
+        PaymentTaken SavePaymentTaken(PaymentTaken paymentTaken);
 
     }
 }
