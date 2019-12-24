@@ -38,7 +38,21 @@ namespace CTrackAPI
             services.AddScoped<IChittiRepository, ChittiRepository>();
             services.AddScoped<IPeopleRepository, PeopleRepository>();
             services.AddScoped<IPaymentsRepository, PaymentsRepository>();
-            
+
+
+            services.AddCors(options =>
+            {
+                options.AddPolicy("AllowAll",
+                    builder =>
+                    {
+                        builder
+                        .AllowAnyOrigin()
+                        .AllowAnyMethod()
+                        .AllowAnyHeader()
+                        .AllowCredentials();
+                    });
+            });
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new Swashbuckle.AspNetCore.Swagger.Info { Title = "CTrack API", Version = "v1" });
@@ -49,11 +63,7 @@ namespace CTrackAPI
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
-
-            app.UseCors(x => x
-              .AllowAnyOrigin()
-              .AllowAnyMethod()
-              .AllowAnyHeader());
+            app.UseCors("AllowAll");           
 
             app.UseHttpsRedirection();
             app.UseMvc();

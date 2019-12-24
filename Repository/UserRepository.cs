@@ -32,6 +32,7 @@ namespace CTrackAPI.Repository
                 objPermiss.UserPID = user.UserPID;
                 objPermiss.PeoplePID = item.PeoplePID;
                 objPermiss.CreatedOn = DateTime.Now;
+                objPermiss.UpdatedOn = DateTime.Now;
                 objPermiss.CreatedBy = user.UserPID;
                 _context.Permission.Add(objPermiss);
                 _context.SaveChanges();

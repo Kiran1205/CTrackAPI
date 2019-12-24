@@ -4,10 +4,12 @@ using System.Linq;
 using System.Threading.Tasks;
 using CTrackAPI.Entities;
 using CTrackAPI.Repositories.Interfaces;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CTrackAPI.Controllers
 {
+    
     [Route("api/[controller]")]
     [ApiController]
     public class UserController : ControllerBase

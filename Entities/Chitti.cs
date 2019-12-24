@@ -21,6 +21,10 @@ namespace CTrackAPI.Entities
 
         public DateTime StartDate { get; set; }
 
+        public DateTime EndDate { get; set; }
+
+        public bool Archived { get; set; }
+
         public DateTime CreatedOn { get; set; }
 
         public DateTime UpdatedOn { get; set; }
@@ -28,5 +32,9 @@ namespace CTrackAPI.Entities
         public long CreatedBy { get; set; }
 
         public long UpdatedBy { get; set; }
+
+        public Chitti() {
+            StartDate = DateTime.Now;
+        }
     }
 }

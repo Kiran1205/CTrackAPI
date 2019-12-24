@@ -39,7 +39,21 @@ namespace CTrackAPI.Repository
 
         public List<PaymentPaid> GetPeoplePaidHistory(long PeoplePid)
         {
-            return _context.PaymentPaid.Where(x => x.PeoplePID == PeoplePid).ToList();
+            var list = new List<PaymentPaid>();
+            var chittipid =  _context.People.First(x => x.PeoplePID == PeoplePid).ChittiPID;
+            var listofpayments = _context.PaymentTaken.Where(x => x.ChittiPID == chittipid).ToList();
+            list = _context.PaymentPaid.Where(x => x.PeoplePID == PeoplePid).ToList();
+            foreach (var item in listofpayments)
+            {
+                list.Add(new PaymentPaid()
+                {
+                    PaidAmount = -item.AmountByPeople,
+                    PaidDate = item.MonthDate,
+                    Comments = "Month :"+item.MonthNumber.ToString()
+                });
+            }
+            return list;
+            
         }
 
         public PaymentTaken GetPaymentTaken(long ChittiPID)

@@ -19,6 +19,12 @@ namespace CTrackAPI.Repository
 
         public People Create(People people)
         {
+            var peopleCount =  _context.People.Where(x => x.ChittiPID == people.ChittiPID).Count();
+            var NoOfMonths = _context.Chitti.First(x => x.ChittiPID == people.ChittiPID).NoOfMonths;
+
+            if (peopleCount > NoOfMonths)
+                throw new Exception("House Full");
+
             _context.People.Add(people);
             _context.SaveChanges();
 
@@ -97,6 +103,7 @@ namespace CTrackAPI.Repository
                     people.ChittiPID = peopledata.ChittiPID;
                     people.PhoneNumber = peopledata.PhoneNumber;
                     people.PeoplePID = peopledata.PeoplePID;
+
                     var objpaidAmount = _context.PaymentPaid.Where(x => x.PeoplePID == peopledata.PeoplePID)
                         .GroupBy(o => new { o.PeoplePID, o.ChittiPID })
                         .Select(g => new
@@ -114,7 +121,22 @@ namespace CTrackAPI.Repository
         }
         public bool Delete(int PeopleID)
         {
-            
+            var permission = _context.Permission.Where(x => x.PeoplePID == PeopleID).ToList();
+            _context.Permission.RemoveRange(permission);
+            _context.SaveChanges();
+
+            var people = _context.People.Where(x => x.PeoplePID == PeopleID).ToList();
+            _context.People.RemoveRange(people);
+            _context.SaveChanges();
+
+            var payments = _context.PaymentTaken.Where(x => x.PeoplePID == PeopleID).ToList();
+            _context.PaymentTaken.RemoveRange(payments);
+            _context.SaveChanges();
+
+            var paymentPaid = _context.PaymentPaid.Where(x => x.PeoplePID == PeopleID).ToList();
+            _context.PaymentPaid.RemoveRange(paymentPaid);
+            _context.SaveChanges();
+
             return true;
         }
 

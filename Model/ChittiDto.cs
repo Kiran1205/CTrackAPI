@@ -23,5 +23,7 @@ namespace CTrackAPI.Model
         public long RolePid { get; set; }
 
         public long CalledUserPID { get; set; }
+
+        public DateTime EndDate { get; set; }
     }
 }

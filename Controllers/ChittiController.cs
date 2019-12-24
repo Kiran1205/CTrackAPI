@@ -57,6 +57,7 @@ public class ChittiController : ControllerBase
 
         try
         {
+            chitti.EndDate = chitti.StartDate.AddMonths(chitti.NoOfMonths);
             chitti.CreatedOn = DateTime.Now;
             chitti.UpdatedOn = DateTime.Now;
             _chittiRepository.Create(chitti);
@@ -68,8 +69,27 @@ public class ChittiController : ControllerBase
             return BadRequest(new { message = ex.Message });
         }
     }
+    // POST api/values
+    [HttpPut("update")]
+    public IActionResult update([FromBody]Chitti chitti)
+    {
+        if (chitti == null)
+            return BadRequest(new { message = "Bad request" });
 
-    
+        try
+        {
+            chitti.EndDate = chitti.StartDate.AddMonths(chitti.NoOfMonths);            
+            chitti.UpdatedOn = DateTime.Now;
+            _chittiRepository.Update(chitti);
+            return Ok(chitti);
+        }
+        catch (Exception ex)
+        {
+            // return error message if there was an exception
+            return BadRequest(new { message = ex.Message });
+        }
+    }
+
     // PUT api/values/5
     [HttpPut("{id}")]
     public void Put(int id, [FromBody] string value)
@@ -80,5 +100,7 @@ public class ChittiController : ControllerBase
     [HttpDelete("{id}")]
     public void Delete(int id)
     {
+        _chittiRepository.Delete(id);
+        return;
     }
 }

@@ -45,7 +45,7 @@ namespace CTrackAPI.Repository
         }
         public Chitti Get(long ChittiPID)
         {
-             return _context.Chitti.FirstOrDefault(x => x.ChittiPID == ChittiPID); ;
+            return _context.Chitti.FirstOrDefault(x => x.ChittiPID == ChittiPID) ?? new Chitti();
         }
 
         public List<ChittiDto> GetChittiByUserId(long userid)
@@ -59,17 +59,36 @@ namespace CTrackAPI.Repository
                 chittidto.ChittiPID = item.ChittiPID;
                 chittidto.RolePid = item.RolePID;
                 chittidto.CalledUserPID = userid;
-
+               
                 var chitti = _context.Chitti.FirstOrDefault(x => x.ChittiPID == item.ChittiPID);
 
                 chittidto.Amount = chitti.Amount;
                 chittidto.Name = chitti.Name;
                 chittidto.NoOfMonths = chitti.NoOfMonths;
+                chittidto.EndDate = chitti.EndDate;
 
-                var completedMonths =  _context.PaymentTaken.Where(x => x.ChittiPID == chitti.ChittiPID).Count();
+               var completedMonths =  _context.PaymentTaken.Where(x => x.ChittiPID == chitti.ChittiPID).Count();
+
+              var SumAmountbyPeople =   _context.PaymentTaken.Where(x => x.ChittiPID == chitti.ChittiPID).
+                            GroupBy(o => new {o.ChittiPID })
+                            .Select(g => new {
+                                AmountByPeople = g.Sum(o => o.AmountByPeople)
+                            });
+
+                var PaidAmount = _context.PaymentPaid.Where(x => x.ChittiPID == chitti.ChittiPID).
+                           GroupBy(o => new { o.ChittiPID })
+                           .Select(g => new {
+                               PaidAmount = g.Sum(o => o.PaidAmount)
+                           });
+
 
                 chittidto.PendingMonths = chitti.NoOfMonths - completedMonths;
-                chittidto.PendingAmount = 0;//Need to do 
+                chittidto.PendingAmount = 0;
+                if (SumAmountbyPeople.FirstOrDefault() != null)
+                {
+                    chittidto.PendingAmount = (SumAmountbyPeople.FirstOrDefault().AmountByPeople * chitti.NoOfMonths) - (PaidAmount.FirstOrDefault() == null ? 0 : PaidAmount.FirstOrDefault().PaidAmount);
+                }
+               
 
                 obj.Add(chittidto);
             }
@@ -89,7 +108,27 @@ namespace CTrackAPI.Repository
 
         public bool Delete(int chittiID)
         {
-            return false;
+            var chittitodelete = _context.Chitti.FirstOrDefault(x => x.ChittiPID == chittiID);           
+            _context.Chitti.Remove(chittitodelete);
+            _context.SaveChanges();
+
+            var permission = _context.Permission.Where(x => x.ChittiPID == chittiID).ToList();
+            _context.Permission.RemoveRange(permission);
+            _context.SaveChanges();
+
+            var people = _context.People.Where(x => x.ChittiPID == chittiID).ToList();
+            _context.People.RemoveRange(people);
+            _context.SaveChanges();
+
+            var payments = _context.PaymentTaken.Where(x => x.ChittiPID == chittiID).ToList();
+            _context.PaymentTaken.RemoveRange(payments);
+            _context.SaveChanges();
+
+            var paymentPaid = _context.PaymentPaid.Where(x => x.ChittiPID == chittiID).ToList();
+            _context.PaymentPaid.RemoveRange(paymentPaid);
+            _context.SaveChanges();
+
+            return true;
         }
     }
 }

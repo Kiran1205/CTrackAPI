@@ -77,6 +77,14 @@ namespace CTrackAPI.Controllers
             }
         }
 
-        
+        // DELETE api/values/5
+        [HttpDelete("{id}")]
+        public void Delete(int id)
+        {
+            _peopleRepository.Delete(id);
+            return;
+        }
+
+
     }
 }
