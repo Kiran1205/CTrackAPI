@@ -130,5 +130,42 @@ namespace CTrackAPI.Repository
 
             return true;
         }
+        public List<ChittiScheduleDto> getChittiSchedule(long chittiid)
+        {                 
+            var list = new List<ChittiScheduleDto>();
+            var chitti = _context.Chitti.Where(x => x.ChittiPID == chittiid).First();
+            for (int i = 0; i < chitti.NoOfMonths; i++)
+            {
+                ChittiScheduleDto obj = new ChittiScheduleDto();
+                obj.Month = chitti.StartDate.AddMonths(i);
+                obj.MonthName = chitti.StartDate.AddMonths(i).ToString("MMMM");
+
+                decimal commissionAmount = chitti.Amount * (chitti.Commission / 100);
+                decimal baseAmount = ((chitti.Amount / 100000) * 1200 * (chitti.NoOfMonths - (i + 1)) + commissionAmount);
+                var  payments = _context.PaymentTaken.Where(x => x.ChittiPID == chittiid && x.MonthDate.Month == chitti.StartDate.AddMonths(i).Month
+                && chitti.StartDate.AddMonths(i).Year == x.MonthDate.Year).ToList();
+                obj.BaseAmount = baseAmount;
+                if(payments!= null && payments.Any())
+                {
+                    obj.AuctionAmount = payments.First().AuctionAmount;
+                    obj.Completed = true;
+                    obj.Amount = payments.First().Amount;
+                    obj.PersonAmount = payments.First().AmountByPeople;
+                    if (payments.First().PeoplePID != -1)
+                        obj.Name = _context.People.First(x => x.PeoplePID == payments.First().PeoplePID).Name;
+                    else
+                        obj.Name = "Admin";
+                 }
+                else
+                {
+                    obj.Amount = chitti.Amount - baseAmount;
+                    obj.PersonAmount = (obj.Amount + commissionAmount) / chitti.NoOfMonths;
+                    obj.Completed = false;
+                }
+                list.Add(obj);
+
+            }
+            return list;
+        }
     }
 }

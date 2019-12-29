@@ -144,6 +144,11 @@ namespace CTrackAPI.Repository
         {
             var paymenttakenlist = _context.PaymentTaken.Where(x => x.ChittiPID == chittiPid).Select(y => y.PeoplePID).ToList();
             var peoples = _context.People.Where(x => x.ChittiPID == chittiPid && !paymenttakenlist.Contains(x.PeoplePID)).ToList();
+            peoples.Add(new People()
+            {
+                Name = "Admin",
+                PeoplePID = -1
+            });
             return peoples;
 
         }

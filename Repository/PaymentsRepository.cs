@@ -74,7 +74,7 @@ namespace CTrackAPI.Repository
             obj.MonthNumber = completed +1;
             obj.ChittiPID = ChittiPID;
             obj.CreatedOn = DateTime.Now;
-            obj.MonthDate = DateTime.Now;
+            obj.MonthDate = chitti.StartDate.AddMonths(completed);
             
             return obj;
 

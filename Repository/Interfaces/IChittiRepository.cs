@@ -21,5 +21,7 @@ namespace CTrackAPI.Repository.Interfaces
 
         List<Chitti> GetAdminChitti(long userid);
 
+        List<ChittiScheduleDto> getChittiSchedule(long chittiid);
+
     }
 }
